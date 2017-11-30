@@ -54,6 +54,14 @@ namespace CONNSTService
             return _userDAO.GetUserIDbyUserName(userName);
         }
 
+        public int GetUserIDbyUserAndPW(string userName, string password)
+        {
+            string encodePassword;
+            MD5 md5 = new MD5();
+            encodePassword = md5.EncodePassword(password);
+            return _userDAO.GetUserIDbyUserAndPW(userName, encodePassword);
+        }
+
         public int UpdateUserProfileByUserID(UserProfile userProfile)
         {
             return _userDAO.UpdateProfilebyUserID(userProfile);

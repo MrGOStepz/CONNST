@@ -57,6 +57,8 @@
             this.btnAddUser = new System.Windows.Forms.Button();
             this.dgvListOfUser = new System.Windows.Forms.DataGridView();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.btnReport = new System.Windows.Forms.Button();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.btnPostBlock = new System.Windows.Forms.Button();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
@@ -81,14 +83,13 @@
             this.label17 = new System.Windows.Forms.Label();
             this.txtPostTitle = new System.Windows.Forms.TextBox();
             this.btnPostUpdate = new System.Windows.Forms.Button();
-            this.groupBox9 = new System.Windows.Forms.GroupBox();
-            this.btnReport = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.gbAddUser.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvListOfUser)).BeginInit();
             this.tabPage3.SuspendLayout();
+            this.groupBox9.SuspendLayout();
             this.groupBox8.SuspendLayout();
             this.groupBox7.SuspendLayout();
             this.groupBox6.SuspendLayout();
@@ -100,7 +101,6 @@
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPost)).BeginInit();
             this.groupBox2.SuspendLayout();
-            this.groupBox9.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -387,6 +387,26 @@
             this.tabPage3.Text = "Post";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
+            // groupBox9
+            // 
+            this.groupBox9.Controls.Add(this.btnReport);
+            this.groupBox9.Location = new System.Drawing.Point(1008, 550);
+            this.groupBox9.Name = "groupBox9";
+            this.groupBox9.Size = new System.Drawing.Size(324, 89);
+            this.groupBox9.TabIndex = 21;
+            this.groupBox9.TabStop = false;
+            this.groupBox9.Text = "Report Post";
+            // 
+            // btnReport
+            // 
+            this.btnReport.Location = new System.Drawing.Point(1, 25);
+            this.btnReport.Name = "btnReport";
+            this.btnReport.Size = new System.Drawing.Size(318, 52);
+            this.btnReport.TabIndex = 19;
+            this.btnReport.Text = "Report";
+            this.btnReport.UseVisualStyleBackColor = true;
+            this.btnReport.Click += new System.EventHandler(this.btnReport_Click);
+            // 
             // groupBox8
             // 
             this.groupBox8.Controls.Add(this.btnPostBlock);
@@ -630,25 +650,6 @@
             this.btnPostUpdate.UseVisualStyleBackColor = true;
             this.btnPostUpdate.Click += new System.EventHandler(this.btnPostUpdate_Click);
             // 
-            // groupBox9
-            // 
-            this.groupBox9.Controls.Add(this.btnReport);
-            this.groupBox9.Location = new System.Drawing.Point(1008, 550);
-            this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(324, 89);
-            this.groupBox9.TabIndex = 21;
-            this.groupBox9.TabStop = false;
-            this.groupBox9.Text = "Report Post";
-            // 
-            // btnReport
-            // 
-            this.btnReport.Location = new System.Drawing.Point(1, 25);
-            this.btnReport.Name = "btnReport";
-            this.btnReport.Size = new System.Drawing.Size(318, 52);
-            this.btnReport.TabIndex = 19;
-            this.btnReport.Text = "Report";
-            this.btnReport.UseVisualStyleBackColor = true;
-            // 
             // fmTesting
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -667,6 +668,7 @@
             this.gbAddUser.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvListOfUser)).EndInit();
             this.tabPage3.ResumeLayout(false);
+            this.groupBox9.ResumeLayout(false);
             this.groupBox8.ResumeLayout(false);
             this.groupBox7.ResumeLayout(false);
             this.groupBox6.ResumeLayout(false);
@@ -679,7 +681,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvPost)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            this.groupBox9.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

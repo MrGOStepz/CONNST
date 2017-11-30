@@ -7,6 +7,7 @@ using System.Data;
 using MySql.Data.MySqlClient;
 using System.Configuration;
 
+
 namespace DataAccessLayer
 {
     public class UserDAO
@@ -228,7 +229,7 @@ namespace DataAccessLayer
                 stringSQL.Append("UPDATE ");
                 stringSQL.Append(TABLE_USER);
                 stringSQL.Append(" SET first_name = @firstName, last_name = @lastName, email = @email, phone = @phone, address = @address" +
-                    ", last_active_at = @lastActiveAt, dob = @dob, image = @imagePath, password = @password ");
+                    ", last_active_at = @lastActiveAt, dob = @dob, image = @imagePath ");
                 stringSQL.Append("WHERE user_id = @userID;");
 
                 MySqlCommand cmd = new MySqlCommand(stringSQL.ToString(), _conn);
@@ -240,7 +241,7 @@ namespace DataAccessLayer
                 cmd.Parameters.AddWithValue("@lastActiveAt", userProfile.LastActiveTime);
                 cmd.Parameters.AddWithValue("@dob", userProfile.DateOfBirth);
                 cmd.Parameters.AddWithValue("@imagePath", userProfile.ImagePath);
-                cmd.Parameters.AddWithValue("@password", userProfile.Password);
+                //cmd.Parameters.AddWithValue("@password", userProfile.Password);
                 cmd.Parameters.AddWithValue("@userID", userProfile.UserID);
 
                 cmd.ExecuteNonQuery();
@@ -266,6 +267,36 @@ namespace DataAccessLayer
                 stringSQL.Append(" WHERE username LIKE @userName");
                 MySqlCommand cmd = new MySqlCommand(stringSQL.ToString(), _conn);
                 cmd.Parameters.AddWithValue("@userName", userName);
+                MySqlDataAdapter adp = new MySqlDataAdapter(cmd);
+                MySqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    userID = (int)reader["user_id"];
+                }
+                cmd.Dispose();
+                DatabaseClose();
+
+                return userID;
+            }
+            catch (Exception ex)
+            {
+                return -1;
+            }
+        }
+
+        public int GetUserIDbyUserAndPW(string userName, string password)
+        {
+            try
+            {
+                StringBuilder stringSQL = new StringBuilder();
+                int userID = -1;
+                DatabaseOpen();
+                stringSQL.Append("SELECT user_id FROM ");
+                stringSQL.Append(TABLE_USER);
+                stringSQL.Append(" WHERE username LIKE @userName AND password LIKE @password");
+                MySqlCommand cmd = new MySqlCommand(stringSQL.ToString(), _conn);
+                cmd.Parameters.AddWithValue("@userName", userName);
+                cmd.Parameters.AddWithValue("@password", password);
                 MySqlDataAdapter adp = new MySqlDataAdapter(cmd);
                 MySqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())

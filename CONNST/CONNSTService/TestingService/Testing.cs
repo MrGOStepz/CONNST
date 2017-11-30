@@ -30,6 +30,15 @@ namespace TestingService
             dgvPostReport.DataSource = postLogic.GetListOfReportPost();
         }
 
+        private void RefreshPost()
+        {
+            PostLogic postLogic = new PostLogic();
+            dgvPost.DataSource = postLogic.GetListOfPost();
+            dgvDeletePost.DataSource = postLogic.GetListOfDeletePost();
+            dgvActivePost.DataSource = postLogic.GetListOfActivePost();
+            dgvPostReport.DataSource = postLogic.GetListOfReportPost();
+        }
+
         #region User
         private void ClearTextBoxAddUser()
         {
@@ -144,7 +153,7 @@ namespace TestingService
             postDetail.Description = txtPostDescription.Text;
 
             postLogic.AddNewPost(postDetail);
-            dgvPost.DataSource = postLogic.GetListOfPost();
+            RefreshPost();
         }
 
         private void btnPostUpdate_Click(object sender, EventArgs e)
@@ -158,26 +167,35 @@ namespace TestingService
             postDetail.Description = txtPostDescription.Text;
 
             postLogic.EditPostbyUserID(postDetail);
-            dgvPost.DataSource = postLogic.GetListOfPost();
+            RefreshPost();
         }
 
         private void btnPostDelete_Click(object sender, EventArgs e)
         {
             PostLogic postLogic = new PostLogic();
             postLogic.DeletePostbyPostID(int.Parse(txtPostID.Text), int.Parse(txtPostUserID.Text), txtPostDescription.Text);
-            dgvDeletePost.DataSource = postLogic.GetListOfDeletePost();
+            RefreshPost();
         }
 
         private void btnPostActive_Click(object sender, EventArgs e)
         {
             PostLogic postLogic = new PostLogic();
             postLogic.ApprovePost(int.Parse(txtPostID.Text));
-            dgvActivePost.DataSource = postLogic.GetListOfActivePost();
+            RefreshPost();
         }
 
         private void btnPostBlock_Click(object sender, EventArgs e)
         {
+            PostLogic postLogic = new PostLogic();
+            postLogic.UpdateBlockedPost(int.Parse(txtPostID.Text), 1);
+            RefreshPost();
+        }
 
+        private void btnReport_Click(object sender, EventArgs e)
+        {
+            PostLogic postLogic = new PostLogic();
+            postLogic.ReportPostbyPostID(int.Parse(txtPostID.Text), int.Parse(txtPostUserID.Text), "Test", DateTime.Now.ToString("yyyy-MM-d HH:mm:ss"));
+            RefreshPost();
         }
     }
 }

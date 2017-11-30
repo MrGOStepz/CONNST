@@ -10,8 +10,8 @@ namespace CONNSTService
 {
     public class PostLogic
     {
-        private DataTable _dataTable;
-        private PostDAO _postDAO;
+        private DataTable _dataTable = new DataTable();
+        private PostDAO _postDAO = new PostDAO();
 
         public List<PostModel> GetListOfPost()
         {
@@ -43,34 +43,48 @@ namespace CONNSTService
             return posts;
         }
 
-        public List<PostModel> GetListOfDeletePost()
-        {
-            List<PostModel> posts = new List<PostModel>();
+        //public List<PostModel> GetListOfDeletePost()
+        //{
+        //    List<PostModel> posts = new List<PostModel>();
 
+        //    _dataTable = _postDAO.GetListOfDeletePost();
+
+        //    foreach (DataRow userRow in _dataTable.Rows)
+        //    {
+        //        PostModel post = PostModel.Parse(userRow);
+        //        posts.Add(post);
+        //    }
+
+        //    return posts;
+        //}
+
+        public DataTable GetListOfDeletePost()
+        {
             _dataTable = _postDAO.GetListOfDeletePost();
 
-            foreach (DataRow userRow in _dataTable.Rows)
-            {
-                PostModel post = PostModel.Parse(userRow);
-                posts.Add(post);
-            }
-
-            return posts;
+            return _dataTable;
         }
 
-        public List<PostModel> GetListOfReportPost()
-        {
-            List<PostModel> posts = new List<PostModel>();
+        //public List<PostModel> GetListOfReportPost()
+        //{
+        //    List<PostModel> posts = new List<PostModel>();
 
+        //    _dataTable = _postDAO.GetListOfReportPost();
+
+        //    foreach (DataRow userRow in _dataTable.Rows)
+        //    {
+        //        PostModel post = PostModel.Parse(userRow);
+        //        posts.Add(post);
+        //    }
+
+        //    return posts;
+        //}
+
+        public DataTable GetListOfReportPost()
+        {
             _dataTable = _postDAO.GetListOfReportPost();
 
-            foreach (DataRow userRow in _dataTable.Rows)
-            {
-                PostModel post = PostModel.Parse(userRow);
-                posts.Add(post);
-            }
-
-            return posts;
+            return _dataTable;
         }
 
 
@@ -81,7 +95,7 @@ namespace CONNSTService
 
         public int ReportPostbyPostID(int postID, int userID, string reportDetail, string reportDate)
         {
-            return _postDAO.ReportPostbyPostID(postID, userID, reportDetail, reportDetail);
+            return _postDAO.ReportPostbyPostID(postID, userID, reportDetail, reportDate);
         }
 
         public int DeletePostbyPostID(int postID, int userID, string description)

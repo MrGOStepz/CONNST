@@ -20,17 +20,28 @@ namespace DataAccessLayer
         private DateTime editDate;
         private int approveStatus;
 
-        public int ApproveStatus
+        public int PostID
         {
-            get { return approveStatus; }
-            set { approveStatus = value; }
+            get { return postID; }
+            set { postID = value; }
         }
 
+        public string Title
+        {
+            get { return title; }
+            set { title = value; }
+        }
 
         public int UserID
         {
             get { return userID; }
             set { userID = value; }
+        }
+
+        public int ApproveStatus
+        {
+            get { return approveStatus; }
+            set { approveStatus = value; }
         }
 
         public int IsBlocked
@@ -74,17 +85,7 @@ namespace DataAccessLayer
         }
 
 
-        public string Title
-        {
-            get { return title; }
-            set { title = value; }
-        }
 
-        public int PostID
-        {
-            get { return postID; }
-            set { postID = value; }
-        }
 
         public static PostModel Parse(DataRow dataRow)
         {

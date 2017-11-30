@@ -1,17 +1,32 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SiteMain.Master" AutoEventWireup="true" CodeBehind="forgotpassword.aspx.cs" Inherits="CONNST.forgotpassword" %>
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
+         <style type="text/css">
+body { background-image:url("../images/bg-index.jpg");
+       background-size: cover;
+    background-repeat: repeat;
+}
+
+.login-padding{
+    padding: 2rem 1rem;
+}
+.vertical-center {
+  min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+  min-height: 100vh; /* These two lines are counted as one :-)       */
+
+  display: flex;
+  align-items: center;
+}
+</style>
         <div id="login-overlay" class="modal-dialog">
         <div class="modal-content">
             <div class="modal-body">
                 <div class="row"> 
                     <div class="col-xl-12">
-                        <p style="text-align: center;" class="h4">Change Password</p>
-                        <div class="jumbotron padding-bottom20">
+                        <p style="text-align: center;" class="h4">Your Email</p>
+                        <div class="jumbotron login-padding">
                             <div class="form-group">
-                                <label for="email" class="control-label">New Password</label>
-                                <asp:TextBox ID="txtNewPassword" runat="server" CssClass="form-control" title="New Password"></asp:TextBox>  
-                                <label for="email" class="control-label">Confirm Password</label>
-                                <asp:TextBox ID="txtConfirmPassword" runat="server" CssClass="form-control" title="Confirm Password"></asp:TextBox>  
+                                <label for="email" class="control-label">Email</label>
+                                <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" title="Email"></asp:TextBox>  
 
                             </div>
                             <asp:Button ID="btnSumbit" runat="server" Text="Submit" class="btn btn-info btn-block" /> <br />

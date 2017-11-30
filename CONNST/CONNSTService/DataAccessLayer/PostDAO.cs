@@ -70,7 +70,7 @@ namespace DataAccessLayer
             try
             {
                 DatabaseOpen();
-                MySqlCommand cmd = new MySqlCommand("SELECT * FROM tb_post AS PT LEFT JOIN tb_post_delete AS PTD ON PT.post_id <> PTD.post_id WHERE approve_status_id = 1;", _conn);
+                MySqlCommand cmd = new MySqlCommand("SELECT * FROM tb_post AS PT LEFT JOIN tb_post_delete AS PTD ON PT.post_id = PTD.post_id WHERE PT.approve_status_id = 1 AND PT.is_blocked = 0 AND PTD.post_id IS NULL;", _conn);
                 MySqlDataAdapter adp = new MySqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
                 adp.Fill(dt);
@@ -171,7 +171,7 @@ namespace DataAccessLayer
                 stringSQL.Append("INSERT INTO ");
                 stringSQL.Append(TABLE_POST_REPORT);
                 stringSQL.Append(" (post_id, user_id, report_detail, report_at, is_checked)");
-                stringSQL.Append(" VALUES (@postID, @userID, @reportDetail, @reportAt), @isChecked;");
+                stringSQL.Append(" VALUES (@postID, @userID, @reportDetail, @reportAt, @isChecked);");
 
                 MySqlCommand cmd = new MySqlCommand(stringSQL.ToString(), _conn);
                 cmd.Parameters.AddWithValue("@postID", postID);
@@ -201,16 +201,17 @@ namespace DataAccessLayer
                 DatabaseOpen();
                 stringSQL.Append("UPDATE ");
                 stringSQL.Append(TABLE_POST);
-                stringSQL.Append(" SET title_name = @titleName, description = @description, post_type_id = @postTypeID, is_active = @isActive, isBlocked = @isBlocked, approve_status_id = @approveStatus");
+                stringSQL.Append(" SET title_name = @titleName, description = @description, post_type_id = @postTypeID");//, is_active = @isActive, isBlocked = @isBlocked, approve_status_id = @approveStatus");
                 stringSQL.Append(" WHERE post_id = @postID;");
 
                 MySqlCommand cmd = new MySqlCommand(stringSQL.ToString(), _conn);
                 cmd.Parameters.AddWithValue("@titleName", postDetail.Title);
                 cmd.Parameters.AddWithValue("@description", postDetail.Description);
-                cmd.Parameters.AddWithValue("@post_type_id", postDetail.PostType);
-                cmd.Parameters.AddWithValue("@isActive", postDetail.IsActive);
-                cmd.Parameters.AddWithValue("@isBlocked", postDetail.IsBlocked);
-                cmd.Parameters.AddWithValue("@approveStatus", postDetail.ApproveStatus);
+                cmd.Parameters.AddWithValue("@postTypeID", postDetail.PostType);
+                //cmd.Parameters.AddWithValue("@isActive", postDetail.IsActive);
+                //cmd.Parameters.AddWithValue("@isBlocked", postDetail.IsBlocked);
+                //cmd.Parameters.AddWithValue("@approveStatus", postDetail.ApproveStatus);
+                cmd.Parameters.AddWithValue("@postID", postDetail.PostID);
                 cmd.ExecuteNonQuery();
 
                 return 1;
@@ -260,11 +261,12 @@ namespace DataAccessLayer
                 DatabaseOpen();
                 stringSQL.Append("UPDATE ");
                 stringSQL.Append(TABLE_POST);
-                stringSQL.Append(" SET approve_status_id = @approveStatus");
+                stringSQL.Append(" SET approve_status_id = @approveStatus, is_active = @isActive");
                 stringSQL.Append(" WHERE post_id = @postID;");
 
                 MySqlCommand cmd = new MySqlCommand(stringSQL.ToString(), _conn);
                 cmd.Parameters.AddWithValue("@approveStatus", 1);
+                cmd.Parameters.AddWithValue("@isActive", 1);
                 cmd.Parameters.AddWithValue("@postID", postID);
                 cmd.ExecuteNonQuery();
 
